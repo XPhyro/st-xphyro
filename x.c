@@ -2139,6 +2139,8 @@ keyboard_select(const Arg *dummy)
 int
 main(int argc, char *argv[])
 {
+	int i;
+	char *colval;
 	xw.l = xw.t = 0;
 	xw.isfixed = False;
 	xsetcursor(cursorshape);
@@ -2152,6 +2154,11 @@ main(int argc, char *argv[])
 		break;
 	case 'c':
 		opt_class = EARGF(usage());
+		break;
+	case 'C':
+		colval = strtok(EARGF(usage()), "@");
+		i = atoi(strtok(NULL, "@"));
+		colorname[i] = colval;
 		break;
 	case 'e':
 		if (argc > 0)

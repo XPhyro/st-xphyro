@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Adapted from LukeSmithxyz/st.
+
+sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' | dmenu -i -l 20 -p 'Copy which url?' | tr -d '\n' | xclip -selection clipboard

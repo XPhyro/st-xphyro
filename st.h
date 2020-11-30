@@ -81,6 +81,7 @@ void die(const char *, ...);
 void redraw(void);
 void draw(void);
 
+void iso14755(const Arg *);
 void kscrolldown(const Arg *);
 void kscrollup(const Arg *);
 void newterm(const Arg *);
@@ -126,4 +127,5 @@ extern char *termname;
 extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
+extern char *iso14755_cmd;
 extern float alpha;

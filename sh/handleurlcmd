@@ -16,10 +16,10 @@ urls="$( sed 's/.*│//g' | tr -d '\n' | grep -aEo "$urlregex" | awk '!seen[$0]+
 [ "$urls" ] || exit
 
 [ "$willyank" = "1" ] && {
-    printf "%s" "$urls" | dmenu -i -p 'Copy which url?' -l 20 | tr -d '\n' | xclip -sel clip
+    printf '%s' "$urls" | dmenu -i -l 20 -p 'Copy which url?' | tr -d '\n' | xclip -sel clip
 }
 
 [ "$willopen" = "1" ] && {
-    chosen="$( printf "%s" "$urls" | dmenu -i -p 'Follow which url?' -l 20 )"
-    setsid xdg-open "$chosen" >/dev/null 2>&1 &
+    chosen="$( printf '%s' "$urls" | dmenu -i -l 20 -p 'Follow which url?' )"
+    setsid xdg-open "$chosen" > /dev/null 2>&1 &
 }

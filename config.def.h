@@ -224,7 +224,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
 	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
 	{ MODKEY,               XK_y,           externalpipe,   {.v = yankurlcmd } },
-	{ MODKEY,               XK_o,           externalpipe,   {.v = yankoutputcmd } }
+	{ MODKEY,               XK_o,           externalpipe,   {.v = yankoutputcmd } },
 };
 
 /*

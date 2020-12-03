@@ -1,17 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
+#define FONTSIZE "13"
+
 /*
  * appearance
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Liberation Mono:pixelsize="FONTSIZE":antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-    "mono:pixelsize=14:antialias=true:autohint=true",
-    "JoyPixels:pixelsize=10:antialias=true:autohint=true",
-    "Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",
-    "Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true",
+    "mono:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "JoyPixels:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "Inconsolata for Powerline:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "Hack Nerd Font Mono:pixelsize="FONTSIZE":antialias=true:autohint=true",
 };
 
 static int borderpx = 2;

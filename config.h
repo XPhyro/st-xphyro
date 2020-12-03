@@ -10,8 +10,8 @@ static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 static char *font2[] = {
     "mono:pixelsize=14:antialias=true:autohint=true",
     "JoyPixels:pixelsize=10:antialias=true:autohint=true",
-	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",
-	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true",
+    "Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",
+    "Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true",
 };
 
 static int borderpx = 2;
@@ -202,11 +202,9 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (MODKEY|ShiftMask)
 
-static char *openurlcmd[] = { "/bin/sh", "-c", "openurlcmd", "externalpipe", NULL };
-
-static char *copyurlcmd[] = { "/bin/sh", "-c", "copyurlcmd", "externalpipe", NULL };
-
-static char *copyoutputcmd[] = { "/bin/sh", "-c", "copyoutputcmd", "externalpipe", NULL };
+static char *openurlcmd[] = { "/bin/sh", "-c", "handleurlcmd -o", "externalpipe", NULL };
+static char *yankurlcmd[] = { "/bin/sh", "-c", "handleurlcmd -y", "externalpipe", NULL };
+static char *yankoutputcmd[] = { "/bin/sh", "-c", "yankoutputcmd", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -230,8 +228,8 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_u,           kscrollup,      {.i = -1} },
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
 	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
-	{ MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
-	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutputcmd } }
+	{ MODKEY,               XK_y,           externalpipe,   {.v = yankurlcmd } },
+	{ MODKEY,               XK_o,           externalpipe,   {.v = yankoutputcmd } }
 };
 
 /*

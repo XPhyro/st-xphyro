@@ -10,10 +10,13 @@
 static char *font = "Liberation Mono:pixelsize="FONTSIZE":antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-    "mono:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "JoyPixels:pixelsize="FONTSIZE":antialias=true:autohint=true",
-    "Inconsolata for Powerline:pixelsize="FONTSIZE":antialias=true:autohint=true",
-    "Hack Nerd Font Mono:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "IPAexMincho:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "IPAPMincho:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "IPAMincho:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "IPAexGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "IPAPGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "IPAGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
 };
 
 static int borderpx = 2;

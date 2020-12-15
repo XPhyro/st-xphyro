@@ -215,9 +215,9 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_U,           zoom,           {.f = +2} },
 	{ TERMMOD,              XK_D,           zoom,           {.f = -2} },
 	{ TERMMOD,              XK_R,           zoomreset,      {.f =  0} },
-	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
-	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
-	{ MODKEY,               XK_p,           selpaste,       {.i =  0} },
+	{ MODKEY,               XK_y,           clipcopy,       {.i =  0} },
+	{ MODKEY,               XK_p,           clippaste,      {.i =  0} },
+	{ MODKEY,               XK_v,           selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
     { TERMMOD,              XK_Control_L,   iso14755,       {.i =  0} },
 	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
@@ -227,7 +227,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
     { MODKEY,               XK_Escape,      keyboard_select,{.i =  0} },
 	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
-	{ MODKEY,               XK_y,           externalpipe,   {.v = yankurlcmd } },
+	{ MODKEY,               XK_c,           externalpipe,   {.v = yankurlcmd } },
 	{ MODKEY,               XK_o,           externalpipe,   {.v = yankoutputcmd } },
 };
 

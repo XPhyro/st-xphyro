@@ -17,6 +17,8 @@ static char *font2[] = {
     "IPAexGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "IPAPGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "IPAGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "AR PL Uming CN:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "UnGungseo:pixelsize="FONTSIZE":antialias=true:autohint=true",
 };
 
 static int borderpx = 2;

@@ -131,7 +131,7 @@ on the command line, as in xterm / rxvt.
 This option is only intended for compatibility,
 and all the remaining arguments are used as a command
 even without it.
-.SH SHORTCUTS
+.SH NORMAL MODE SHORTCUTS
 .TP
 .B Break
 Send a break in the serial line.
@@ -171,6 +171,40 @@ Paste from the clipboard selection.
 .B Ctrl-Shift-i
 Launch dmenu to enter a unicode codepoint and send the corresponding glyph
 to st.
+.SH SELECT MODE SHORTCUTS
+.TP
+.B h, j, k, l OR left arrow, down arrow, up arrow, right arrow
+Move cursor left/down/up/right.
+.TP
+.B !, _, *
+Move cursor to the middle of the line/column/screen.
+.TP
+.B 0, $
+Move cursor to the beginning/end of the line.
+.TP
+.B K, J
+Move cursor to the beginning/end of the column.
+.TP
+.B g, G
+Move cursor to the top/bottom left corner of the screen.
+.TP
+.B ?, /
+Activate input mode to search up/down.
+.TP
+.B N, n
+Repeat last search in up/down direction.
+.TP
+.B v
+Toggle move/selection mode.
+.TP
+.B t
+Toggle regular/rectangular selection.
+.TP
+.B Return
+Quit to normal mode, keeping the current highlight.
+.TP
+.B Escape
+Quit to normal mode.
 .SH CUSTOMIZATION
 .B st
 can be customized by creating a custom config.h and (re)compiling the source

@@ -2875,6 +2875,8 @@ search(int selectsearch_mode, Rune *target, int ptarget, int incr, int type, TCu
 	}
 }
 
+#include "x.h"
+
 int
 trt_kbdselect(KeySym ksym, char *buf, int len)
 {
@@ -2921,6 +2923,11 @@ trt_kbdselect(KeySym ksym, char *buf, int len)
 		cu.x = term.c.x, cu.y = term.c.y;
 		set_notifmode(0, ksym);
 		return MODE_KBDSELECT;
+    case XK_y :
+        ;
+        const Arg arg = {.i = 0};
+        clipcopy(&arg);
+        break;
 	case XK_v :
 		if ( selectsearch_mode & 1 )
 			selclear();
@@ -2941,6 +2948,7 @@ trt_kbdselect(KeySym ksym, char *buf, int len)
 		set_notifmode(15, ksym);
 		selectsearch_mode ^= 2;
 		break;
+    case XK_q :
 	case XK_Escape :
 		if ( !in_use )  break;
 		selclear();
@@ -2959,7 +2967,7 @@ trt_kbdselect(KeySym ksym, char *buf, int len)
 		term.c.x = 0;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_4 :
+	case XK_dollar :
 		term.c.x = term.col - 1;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;

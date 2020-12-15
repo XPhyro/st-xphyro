@@ -1,0 +1,1 @@
+void clipcopy(const Arg *);

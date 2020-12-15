@@ -2802,34 +2802,33 @@ redraw(void)
 void
 set_notifmode(int type, KeySym ksym)
 {
-	static char *lib[] = { " MOVE ", " SEL  "};
+	static char *lib[] = { "MOV", "SEL"};
 	static Glyph *g, *deb, *fin;
 	static int col, bot;
 
-	if ( ksym == -1 ) {
+	if (ksym == -1) {
 		free(g);
 		col = term.col, bot = term.bot;
 		g = xmalloc(col * sizeof(Glyph));
 		memcpy(g, term.line[bot], col * sizeof(Glyph));
-
-	}
-	else if ( ksym == -2 )
+	} else if (ksym == -2)
 		memcpy(term.line[bot], g, col * sizeof(Glyph));
 
-	if ( type < 2 ) {
+	if (type < 2) {
 		char *z = lib[type];
-		for (deb = &term.line[bot][col - 6], fin = &term.line[bot][col]; deb < fin; z++, deb++)
-			deb->mode = ATTR_REVERSE,
-				deb->u = *z,
-				deb->fg = defaultfg, deb->bg = defaultbg;
-	}
-	else if ( type < 5 )
+		for (deb = &term.line[bot][col - 6], fin = &term.line[bot][col]; deb < fin; z++, deb++) {
+			deb->mode = ATTR_REVERSE;
+            deb->u = *z;
+            deb->fg = defaultfg, deb->bg = defaultbg;
+        }
+	} else if (type < 5) {
 		memcpy(term.line[bot], g, col * sizeof(Glyph));
-	else {
-		for (deb = &term.line[bot][0], fin = &term.line[bot][col]; deb < fin; deb++)
-			deb->mode = ATTR_REVERSE,
-				deb->u = ' ',
-				deb->fg = defaultfg, deb->bg = defaultbg;
+    } else {
+		for (deb = &term.line[bot][0], fin = &term.line[bot][col]; deb < fin; deb++) {
+			deb->mode = ATTR_REVERSE;
+            deb->u = ' ';
+            deb->fg = defaultfg, deb->bg = defaultbg;
+        }
 		term.line[bot][0].u = ksym;
 	}
 
@@ -2842,13 +2841,13 @@ select_or_drawcursor(int selectsearch_mode, int type)
 {
 	int done = 0;
 
-	if ( selectsearch_mode & 1 ) {
+	if (selectsearch_mode & 1) {
 		selextend(term.c.x, term.c.y, type, done);
 		xsetsel(getsel());
 	}
-	else
-		xdrawcursor(term.c.x, term.c.y, term.line[term.c.y][term.c.x],
-			    term.ocx, term.ocy, term.line[term.ocy][term.ocx]);
+    else
+        xdrawcursor(term.c.x, term.c.y, term.line[term.c.y][term.c.x],
+                    term.ocx, term.ocy, term.line[term.ocy][term.ocx]);
 }
 
 void
@@ -2859,17 +2858,19 @@ search(int selectsearch_mode, Rune *target, int ptarget, int incr, int type, TCu
 
 	for (i = term.col * term.c.y + term.c.x + incr; i != bound; i += incr) {
 		for (r = target; r - target < ptarget; r++) {
-			if ( *r == term.line[(i + r - target) / term.col][(i + r - target) % term.col].u ) {
-				if ( r - target == ptarget - 1 )     break;
+			if (*r == term.line[(i + r - target) / term.col][(i + r - target) % term.col].u) {
+				if (r - target == ptarget - 1)
+                    break;
 			} else {
 				r = NULL;
 				break;
 			}
 		}
-		if ( r != NULL )    break;
+		if (r != NULL)
+            break;
 	}
 
-	if ( i != bound ) {
+	if (i != bound) {
 		term.c.y = i / term.col, term.c.x = i % term.col;
 		select_or_drawcursor(selectsearch_mode, type);
 	}
@@ -2882,34 +2883,28 @@ trt_kbdselect(KeySym ksym, char *buf, int len)
 {
 	static TCursor cu;
 	static Rune target[64];
-	static int type = 1, ptarget, in_use;
-	static int sens, quant;
+	static int type = 1, ptarget, in_use, sens, quant;
 	static char selectsearch_mode;
 	int i, bound, *xy;
 
-	if ( selectsearch_mode & 2 ) {
-		if ( ksym == XK_Return ) {
+	if (selectsearch_mode & 2) {
+		if (ksym == XK_Return) {
 			selectsearch_mode ^= 2;
 			set_notifmode(selectsearch_mode, -2);
-			if ( ksym == XK_Escape )    ptarget = 0;
+			if (ksym == XK_Escape || ksym == XK_q)
+                ptarget = 0;
 			return 0;
-		}
-		else if ( ksym == XK_BackSpace ) {
+		} else if (ksym == XK_0) {
 			if ( !ptarget )     return 0;
 			term.line[term.bot][ptarget--].u = ' ';
-		}
-		else if ( len < 1 ) {
+		} else if (len < 1 || ptarget == term.col  || ksym == XK_Escape || ksym == XK_q) {
 			return 0;
-		}
-		else if ( ptarget == term.col  || ksym == XK_Escape ) {
-			return 0;
-		}
-		else {
+		} else {
 			utf8decode(buf, &target[ptarget++], len);
 			term.line[term.bot][ptarget].u = target[ptarget - 1];
 		}
 
-		if ( ksym != XK_BackSpace )
+		if (ksym != XK_0)
 			search(selectsearch_mode, &target[0], ptarget, sens, type, &cu);
 
 		term.dirty[term.bot] = 1;
@@ -2917,112 +2912,115 @@ trt_kbdselect(KeySym ksym, char *buf, int len)
 		return 0;
 	}
 
-	switch ( ksym ) {
-	case -1 :
+	switch (ksym) {
+	case -1:
 		in_use = 1;
 		cu.x = term.c.x, cu.y = term.c.y;
 		set_notifmode(0, ksym);
 		return MODE_KBDSELECT;
-    case XK_y :
+    case XK_y:
         ;
         const Arg arg = {.i = 0};
         clipcopy(&arg);
         break;
-	case XK_v :
-		if ( selectsearch_mode & 1 )
+	case XK_v:
+		if (selectsearch_mode & 1)
 			selclear();
 		else
 			selstart(term.c.x, term.c.y, 0);
 		set_notifmode(selectsearch_mode ^= 1, ksym);
 		break;
-	case XK_t :
+	case XK_t:
 		selextend(term.c.x, term.c.y, type ^= 3, i = 0);  /* 2 fois */
 		selextend(term.c.x, term.c.y, type, i = 0);
 		break;
-	case XK_slash :
-	case XK_KP_Divide :
-	case XK_question :
-		ksym &= XK_question;                /* Divide to slash */
+	case XK_slash:
+        /* FALLTHROUGH */
+	case XK_KP_Divide:
+        /* FALLTHROUGH */
+	case XK_question:
+		ksym &= XK_question;
 		sens = (ksym == XK_question) ? -1 : 1;
 		ptarget = 0;
 		set_notifmode(15, ksym);
 		selectsearch_mode ^= 2;
 		break;
-    case XK_q :
-	case XK_Escape :
-		if ( !in_use )  break;
+    case XK_q: 
+        /* FALLTHROUGH */
+	case XK_Escape:
+		if (!in_use)
+            break;
 		selclear();
-	case XK_Return :
+	case XK_Return:
 		set_notifmode(4, ksym);
 		term.c.x = cu.x, term.c.y = cu.y;
 		select_or_drawcursor(selectsearch_mode = 0, type);
 		in_use = quant = 0;
 		return MODE_KBDSELECT;
-	case XK_n :
-	case XK_N :
-		if ( ptarget )
+	case XK_n:
+	case XK_N:
+		if (ptarget)
 			search(selectsearch_mode, &target[0], ptarget, (ksym == XK_n) ? -1 : 1, type, &cu);
 		break;
-	case XK_0 :
+	case XK_0:
 		term.c.x = 0;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_dollar :
+	case XK_dollar:
 		term.c.x = term.col - 1;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_b :
+	case XK_b:
 		term.c.x = 0, term.c.y = 0;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_w :
+	case XK_w:
 		term.c.x = cu.x, term.c.y = cu.y;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_u :
-	case XK_d :
+	case XK_u:
+	case XK_d:
 		term.c.y = (ksym == XK_u ) ? 0 : cu.y;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_exclam :
+	case XK_exclam:
 		term.c.x = term.col >> 1;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_asterisk :
-	case XK_KP_Multiply :
+	case XK_asterisk:
+	case XK_KP_Multiply:
 		term.c.x = term.col >> 1;
-	case XK_underscore :
+	case XK_underscore:
 		term.c.y = cu.y >> 1;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	default :
-		if ( ksym >= XK_0 && ksym <= XK_9 ) {               /* 0-9 keyboard */
+	default:
+		if (ksym >= XK_0 && ksym <= XK_9) {               /* 0-9 keyboard */
 			quant = (quant * 10) + (ksym ^ XK_0);
 			return 0;
-		}
-		else if ( ksym >= XK_KP_0 && ksym <= XK_KP_9 ) {    /* 0-9 numpad */
+		} else if (ksym >= XK_KP_0 && ksym <= XK_KP_9) {    /* 0-9 numpad */
 			quant = (quant * 10) + (ksym ^ XK_KP_0);
 			return 0;
-		}
-		else if ( ksym == XK_k || ksym == XK_h )
-			i = ksym & 1;
-		else if ( ksym == XK_l || ksym == XK_j )
+		} else if (ksym == XK_k || ksym == XK_h) {
+			i = ksym & 1; 
+        } else if (ksym == XK_l || ksym == XK_j) {
 			i = ((ksym & 6) | 4) >> 1;
-		else if ( (XK_Home & ksym) != XK_Home || (i = (ksym ^ XK_Home) - 1) > 3 )
+        } else if ((XK_Home & ksym) != XK_Home || (i = (ksym ^ XK_Home) - 1) > 3) {
 			break;
+        }
 
 		xy = (i & 1) ? &term.c.y : &term.c.x;
 		sens = (i & 2) ? 1 : -1;
 		bound = (i >> 1 ^ 1) ? 0 : (i ^ 3) ? term.col - 1 : term.bot;
 
-		if ( quant == 0 )
+		if (quant == 0)
 			quant++;
 
-		if ( *xy == bound && ((sens < 0 && bound == 0) || (sens > 0 && bound > 0)) )
+		if (*xy == bound && ((sens < 0 && bound == 0) || (sens > 0 && bound > 0)))
 			break;
 
 		*xy += quant * sens;
-		if ( *xy < 0 || ( bound > 0 && *xy > bound) )
+		if (*xy < 0 || ( bound > 0 && *xy > bound))
 			*xy = bound;
 
 		select_or_drawcursor(selectsearch_mode, type);

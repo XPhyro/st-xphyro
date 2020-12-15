@@ -2960,7 +2960,7 @@ trt_kbdselect(KeySym ksym, char *buf, int len)
 	case XK_n:
 	case XK_N:
 		if (ptarget)
-			search(selectsearch_mode, &target[0], ptarget, (ksym == XK_n) ? -1 : 1, type, &cu);
+			search(selectsearch_mode, &target[0], ptarget, (ksym == XK_N) ? -1 : 1, type, &cu);
 		break;
 	case XK_0:
 		term.c.x = 0;
@@ -2970,11 +2970,11 @@ trt_kbdselect(KeySym ksym, char *buf, int len)
 		term.c.x = term.col - 1;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_b:
+	case XK_g:
 		term.c.x = 0, term.c.y = 0;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;
-	case XK_w:
+	case XK_G:
 		term.c.x = cu.x, term.c.y = cu.y;
 		select_or_drawcursor(selectsearch_mode, type);
 		break;

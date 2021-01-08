@@ -200,9 +200,9 @@ static MouseShortcut mshortcuts[] = { };
 #define MODKEY Mod1Mask
 #define TERMMOD (MODKEY|ShiftMask)
 
-static char *openurlcmd[] = { "/bin/sh", "-c", "handleurlcmd -o", "externalpipe", NULL };
-static char *yankurlcmd[] = { "/bin/sh", "-c", "handleurlcmd -y", "externalpipe", NULL };
-static char *yankoutputcmd[] = { "/bin/sh", "-c", "yankoutputcmd", "externalpipe", NULL };
+static char *openurlcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -o", "externalpipe", NULL };
+static char *yankurlcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -y", "externalpipe", NULL };
+static char *yankoutputcmd[] = { "/bin/sh", "-c", "st-yankoutputcmd", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */

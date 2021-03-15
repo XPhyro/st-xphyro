@@ -5,6 +5,7 @@ for i in "$@"
 do
     [ "$i" = "-y" ] || [ "$i" = "--yank" ] && willyank="1"
     [ "$i" = "-o" ] || [ "$i" = "--open" ] && willopen="1"
+    [ "$i" = "-f" ] || [ "$i" = "--no-fuzzy" ] && alias dmenu="dmenu -F"
 done
 
 [ -z "$willyank" ] && [ -z "$willopen" ] && exit

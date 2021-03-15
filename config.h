@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-#define FONTSIZE "14"
+#define FONTSIZE "13"
 
 /*
  * appearance
@@ -202,6 +202,8 @@ static MouseShortcut mshortcuts[] = { };
 
 static char *openurlcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -o", "externalpipe", NULL };
 static char *yankurlcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -y", "externalpipe", NULL };
+static char *openurlnofuzcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -o -f", "externalpipe", NULL };
+static char *yankurlnofuzcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -y -f", "externalpipe", NULL };
 static char *yankoutputcmd[] = { "/bin/sh", "-c", "st-yankoutputcmd", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
@@ -226,8 +228,10 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_u,           kscrollup,      {.i = -1} },
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
     { MODKEY,               XK_Escape,      keyboard_select,{.i =  0} },
-	{ MODKEY,               XK_b,           externalpipe,   {.v = openurlcmd } },
+	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
 	{ MODKEY,               XK_c,           externalpipe,   {.v = yankurlcmd } },
+	{ TERMMOD,              XK_l,           externalpipe,   {.v = openurlcmd } },
+	{ TERMMOD,              XK_c,           externalpipe,   {.v = yankurlcmd } },
 	{ MODKEY,               XK_o,           externalpipe,   {.v = yankoutputcmd } },
 };
 

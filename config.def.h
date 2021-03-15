@@ -200,9 +200,11 @@ static MouseShortcut mshortcuts[] = { };
 #define MODKEY Mod1Mask
 #define TERMMOD (MODKEY|ShiftMask)
 
-static char *openurlcmd[] = { "/bin/sh", "-c", "handleurlcmd -o", "externalpipe", NULL };
-static char *yankurlcmd[] = { "/bin/sh", "-c", "handleurlcmd -y", "externalpipe", NULL };
-static char *yankoutputcmd[] = { "/bin/sh", "-c", "yankoutputcmd", "externalpipe", NULL };
+static char *openurlcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -o", "externalpipe", NULL };
+static char *yankurlcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -y", "externalpipe", NULL };
+static char *openurlnofuzcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -o -f", "externalpipe", NULL };
+static char *yankurlnofuzcmd[] = { "/bin/sh", "-c", "st-handleurlcmd -y -f", "externalpipe", NULL };
+static char *yankoutputcmd[] = { "/bin/sh", "-c", "st-yankoutputcmd", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -228,6 +230,8 @@ static Shortcut shortcuts[] = {
     { MODKEY,               XK_Escape,      keyboard_select,{.i =  0} },
 	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
 	{ MODKEY,               XK_c,           externalpipe,   {.v = yankurlcmd } },
+	{ TERMMOD,              XK_L,           externalpipe,   {.v = openurlcmd } },
+	{ TERMMOD,              XK_C,           externalpipe,   {.v = yankurlcmd } },
 	{ MODKEY,               XK_o,           externalpipe,   {.v = yankoutputcmd } },
 };
 

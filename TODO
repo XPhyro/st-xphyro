@@ -1,3 +1,18 @@
+XPhyro
+======
+
+re-initialisation
+-----------------
+
+* add key to dump all text to a file, along with PWD.
+* add option to re-initialise from a given file.
+
+
+
+
+Suckless
+========
+
 vt emulation
 ------------
 

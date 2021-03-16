@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-#define FONTSIZE "13"
+#define FONTSIZE "15"
 
 /*
  * appearance

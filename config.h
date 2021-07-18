@@ -7,10 +7,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrainsMono:pixelsize="FONTSIZE":antialias=true:autohint=true";
+static char *font = "Liberation Mono:pixelsize="FONTSIZE":antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-    "Liberation Mono:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "JetBrainsMono:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "FontAwesome:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "NotoColorEmoji:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "JoyPixels:pixelsize="FONTSIZE":antialias=true:autohint=true",

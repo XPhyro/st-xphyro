@@ -32,6 +32,8 @@ st \- simple terminal
 .RB [ \-aiv ]
 .RB [ \-c
 .IR class ]
+.RB [ \-C
+.IR color@n ]
 .RB [ \-d
 .IR path ]
 .RB [ \-f
@@ -61,6 +63,9 @@ disable alternate screens in terminal
 .TP
 .BI \-c " class"
 defines the window class (default $TERM).
+.TP
+.BI \-C " color@n"
+overwrites nth color with the given color.
 .TP
 .BI \-d " path"
 changes the working directory to

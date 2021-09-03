@@ -16,6 +16,8 @@ urls="$( sed 's/.*│//g' | tr -d '\n' | grep -aEo "$urlregex" | awk '!seen[$0]+
 
 [ "$urls" ] || exit
 
+alias dmenu="${MENU:-dmenu}"
+
 [ "$willyank" = "1" ] && {
     printf '%s' "$urls" | dmenu -i -l 20 -p 'Copy which url?' | tr -d '\n' | xclip -sel clip
 }

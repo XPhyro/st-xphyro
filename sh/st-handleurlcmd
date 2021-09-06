@@ -1,26 +1,26 @@
 #!/usr/bin/env sh
 # Based from LukeSmithxyz/st.
 
+menu="$(getmenu)"
+
 for i in "$@"
 do
     [ "$i" = "-y" ] || [ "$i" = "--yank" ] && willyank="1"
     [ "$i" = "-o" ] || [ "$i" = "--open" ] && willopen="1"
-    [ "$i" = "-f" ] || [ "$i" = "--no-fuzzy" ] && alias dmenu="dmenu -F"
+    [ "$i" = "-f" ] || [ "$i" = "--no-fuzzy" ] && alias menu="$menu -F"
 done
 
 [ -z "$willyank" ] && [ -z "$willopen" ] && exit
 
 urlregex="(((http|https|gopher|gemini|ftp|ftps|git)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@:$&%?$\#=_~-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)"
 
-urls="$( sed 's/.*│//g' | tr -d '\n' | grep -aEo "$urlregex" | awk '!seen[$0]++' | sed 's/^www./http:\/\/www\./g' )"
+urls="$(sed 's/.*│//g' | tr -d '\n' | grep -aEo "$urlregex" | awk '!seen[$0]++' | sed 's/^www./http:\/\/www\./g')"
 
-[ "$urls" ] || exit
+[ -z "$urls" ] && exit
 
-[ "$willyank" = "1" ] && {
-    printf '%s' "$urls" | dmenu -i -l 20 -p 'Copy which url?' | tr -d '\n' | xclip -sel clip
-}
+[ "$willyank" = "1" ] && printf "%s\n" "$urls" | $menu -i -l 20 -p 'Copy which url?' | tr -d '\n' | xclip -sel clip
 
 [ "$willopen" = "1" ] && {
-    chosen="$( printf '%s' "$urls" | dmenu -i -l 20 -p 'Follow which url?' )"
+    chosen="$(printf "%s\n" "$urls" | $menu -i -l 20 -p 'Follow which url?')"
     setsid xdg-open "$chosen" > /dev/null 2>&1 &
 }

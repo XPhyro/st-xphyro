@@ -12,9 +12,9 @@ done
 
 [ -z "$willyank" ] && [ -z "$willopen" ] && exit
 
-urlregex="(((http|https|gopher|gemini|ftp|ftps|git)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@:$&%?$\#=_~-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)"
+urlregex='(([a-zA-Z]+://|www\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@:$&%?$\#=_~-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'
 
-urls="$(sed 's/.*│//g' | tr -d '\n' | grep -aEo "$urlregex" | awk '!seen[$0]++' | sed 's/^www./http:\/\/www\./g')"
+urls="$(tr -d '\n' | grep -aEo "$urlregex" | sed 's/^www./https:\/\/www\./g' | awk '!seen[$0]++')"
 
 [ -z "$urls" ] && exit
 

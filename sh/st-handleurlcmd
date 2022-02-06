@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Based from LukeSmithxyz/st.
+# Adapted from LukeSmithxyz/st.
 
 menu="$(getmenu)"
 

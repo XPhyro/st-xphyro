@@ -22,5 +22,5 @@ urls="$(tr -d '\n' | grep -aEo "$urlregex" | sed 's/^www./https:\/\/www\./g' | a
 
 [ "$willopen" = "1" ] && {
     chosen="$(printf "%s\n" "$urls" | $menu -i -l 20 -p 'Follow which url?')"
-    setsid xdg-open "$chosen" > /dev/null 2>&1 &
+    setsid --fork xdg-open "$chosen" > /dev/null 2>&1 &
 }

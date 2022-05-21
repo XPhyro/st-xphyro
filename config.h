@@ -23,6 +23,7 @@ static char *font2[] = {
     "IPAexGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "IPAPGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
     "IPAGothic:pixelsize="FONTSIZE":antialias=true:autohint=true",
+    "FandolSong:pixelsize="FONTSIZE":antialias=true:autohint=true",
 };
 
 static int borderpx = 0;

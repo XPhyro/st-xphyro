@@ -1102,7 +1102,9 @@ newterm(const Arg* a)
 		break;
 	case 0:
 		chdir(getcwd_by_pid(pid));
+		setenv("REUSE_TABBED_XID", "1", 1);
 		execlp("st", "./st", NULL);
+		unsetenv("REUSE_TABBED_XID");
 		break;
 	}
 }

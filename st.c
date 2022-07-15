@@ -1107,6 +1107,7 @@ newterm(const Arg* a)
 			execlp("st", "./st", NULL);
 			unsetenv("REUSE_TABBED_XID");
 		} else {
+			unsetenv("REUSE_TABBED_XID");
 			execlp("st", "./st", NULL);
 		}
 		break;

@@ -259,6 +259,7 @@ static char *opt_line  = NULL;
 static char *opt_name  = NULL;
 static char *opt_title = NULL;
 static char *opt_dir   = NULL;
+static int   opt_zoom  = 0;
 
 static int oldbutton = 3; /* button event on startup: 3 = release */
 
@@ -1008,7 +1009,7 @@ xloadfonts(char *fontstr, double fontsize)
 			FcPatternAddDouble(pattern, FC_PIXEL_SIZE, 12);
 			usedfontsize = 12;
 		}
-		defaultfontsize = usedfontsize;
+		defaultfontsize = usedfontsize + opt_zoom;
 	}
 
 	if (xloadfont(&dc.font, pattern))
@@ -1019,7 +1020,7 @@ xloadfonts(char *fontstr, double fontsize)
 		                   FC_PIXEL_SIZE, 0, &fontval);
 		usedfontsize = fontval;
 		if (fontsize == 0)
-			defaultfontsize = fontval;
+			defaultfontsize = fontval + opt_zoom;
 	}
 
 	/* Setting character width and height. */
@@ -1248,6 +1249,10 @@ xinit(int cols, int rows)
 
 	usedfont = (opt_font == NULL)? font : opt_font;
 	xloadfonts(usedfont, 0);
+	if (opt_zoom) {
+		xunloadfonts();
+		xloadfonts(usedfont, usedfontsize + opt_zoom);
+	}
 
 	/* spare fonts */
 	xloadsparefonts();
@@ -2114,14 +2119,10 @@ run(void)
 void
 usage(void)
 {
-	die("usage: %s [-aiv] [-c class] [-d path] [-f font]"
-	    " [-g geometry] [-n name] [-o file]\n"
-	    "          [-T title] [-t title] [-w windowid]"
-	    " [[-e] command [args ...]]\n"
-	    "       %s [-aiv] [-c class] [-d path] [-f font]"
-	    " [-g geometry] [-n name] [-o file]\n"
-	    "          [-T title] [-t title] [-w windowid] -l line"
-	    " [stty_args ...]\n", argv0, argv0);
+	die("usage: %s [-aiv] [-c class] [-d path] [-f font] [-g geometry] [-n name] [-o file]\n"
+	    "          [-T title] [-t title] [-w windowid] [-z zoom] [[-e] command [args ...]]\n"
+	    "       %s [-aiv] [-c class] [-d path] [-f font] [-g geometry] [-n name] [-o file]\n"
+	    "          [-T title] [-t title] [-w windowid] [-z zoom] -l line [stty_args ...]\n", argv0, argv0);
 }
 
 void
@@ -2140,7 +2141,7 @@ int
 main(int argc, char *argv[])
 {
 	int i;
-	char *colval;
+	char *s;
 	xw.l = xw.t = 0;
 	xw.isfixed = False;
 	xsetcursor(cursorshape);
@@ -2156,9 +2157,9 @@ main(int argc, char *argv[])
 		opt_class = EARGF(usage());
 		break;
 	case 'C':
-		colval = strtok(EARGF(usage()), "@");
+		s = strtok(EARGF(usage()), "@");
 		i = atoi(strtok(NULL, "@"));
-		colorname[i] = colval;
+		colorname[i] = s;
 		break;
 	case 'e':
 		if (argc > 0)
@@ -2195,6 +2196,10 @@ main(int argc, char *argv[])
 		break;
 	case 'd':
 		opt_dir = EARGF(usage());
+		break;
+	case 'z':
+		s = EARGF(usage());
+		opt_zoom = atoi(s);
 		break;
 	default:
 		usage();

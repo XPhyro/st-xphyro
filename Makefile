@@ -4,7 +4,7 @@
 
 include config.mk
 
-SRC = st.c x.c
+SRC = st.c x.c boxdraw.c
 SHS = sh/st-handleurlcmd sh/st-yankoutputcmd
 OBJ = $(SRC:.c=.o)
 
@@ -21,6 +21,7 @@ options:
 
 st.o: st.h win.h
 x.o: arg.h st.h win.h
+boxdraw.o: config.h st.h boxdraw_data.h
 
 $(OBJ): config.mk
 

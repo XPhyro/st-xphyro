@@ -1,13 +1,24 @@
 /* See LICENSE file for copyright and license details. */
 
+// #define FONT_IS_JETBRAINS
+
+/* TODO: create a font derived from JetBrainsMono that has infinitely-tileable ligatures like FiraCode */
+#ifdef FONT_IS_JETBRAINS
 #define FONTSIZE "15"
+#else
+#define FONTSIZE "15.4"
+#endif
 
 /*
  * appearance
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
+#ifdef FONT_IS_JETBRAINS
 static char *font = "JetBrainsMono:pixelsize="FONTSIZE":antialias=true:autohint=true";
+#else
+static char *font = "FiraCodeRetina:pixelsize="FONTSIZE":antialias=true:autohint=true";
+#endif
 /* Spare fonts */
 static char *font2[] = {
     "Liberation Mono:pixelsize="FONTSIZE":antialias=true:autohint=true",

@@ -243,8 +243,8 @@ static MouseShortcut mshortcuts[] = {
     { ControlMask,            5,              zoom,           { .f = -1 } },
     { ControlMask|MODKEY,     4,              zoom,           { .f = +2 } },
     { ControlMask|MODKEY,     5,              zoom,           { .f = -2 } },
-    { 0,                      4,              kscrollup,      { .i = 1 } },
-    { 0,                      5,              kscrolldown,    { .i = 1 } },
+    { 0,                      4,              kscrollup,      { .i = 3 } },
+    { 0,                      5,              kscrolldown,    { .i = 3 } },
     { MODKEY,                 4,              kscrollup,      { .i = -1 } },
     { MODKEY,                 5,              kscrolldown,    { .i = -1 } },
 };

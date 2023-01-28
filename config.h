@@ -226,9 +226,9 @@ static uint forcemousemod = ShiftMask;
  */
 char *iso14755_cmd = "dmenu -w \"$WINDOWID\" -p codepoint: </dev/null";
 
-static char *openurlcmd[] = { "/usr/bin/env", "sh", "-c", "st-handleurlcmd -o", "externalpipe", NULL };
-static char *yankurlcmd[] = { "/usr/bin/env", "sh", "-c", "st-handleurlcmd -y", "externalpipe", NULL };
-static char *yankoutputcmd[] = { "/usr/bin/env", "sh", "-c", "st-yankoutputcmd", "externalpipe", NULL };
+static char *openurlcmd[]    = { "/usr/bin/env", "sh", "-c", "st-handleurlcmd -o", "externalpipe", NULL };
+static char *yankurlcmd[]    = { "/usr/bin/env", "sh", "-c", "st-handleurlcmd -y", "externalpipe", NULL };
+static char *yankoutputcmd[] = { "/usr/bin/env", "sh", "-c", "st-yankoutputcmd",   "externalpipe", NULL };
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
@@ -239,42 +239,42 @@ static char *yankoutputcmd[] = { "/usr/bin/env", "sh", "-c", "st-yankoutputcmd",
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
-    { ControlMask,            4,              zoom,           { .f = +1 } },
-    { ControlMask,            5,              zoom,           { .f = -1 } },
-    { ControlMask|MODKEY,     4,              zoom,           { .f = +2 } },
-    { ControlMask|MODKEY,     5,              zoom,           { .f = -2 } },
-    { 0,                      4,              kscrollup,      { .i = 3 } },
-    { 0,                      5,              kscrolldown,    { .i = 3 } },
-    { MODKEY,                 4,              kscrollup,      { .i = -1 } },
-    { MODKEY,                 5,              kscrolldown,    { .i = -1 } },
+    { ControlMask,            4,              zoom,             { .f = +1 } },
+    { ControlMask,            5,              zoom,             { .f = -1 } },
+    { ControlMask|MODKEY,     4,              zoom,             { .f = +2 } },
+    { ControlMask|MODKEY,     5,              zoom,             { .f = -2 } },
+    { 0,                      4,              kscrollup,        { .i = 3 } },
+    { 0,                      5,              kscrolldown,      { .i = 3 } },
+    { MODKEY,                 4,              kscrollup,        { .i = -1 } },
+    { MODKEY,                 5,              kscrolldown,      { .i = -1 } },
 };
 
 static Shortcut shortcuts[] = {
-	/* mask                   keysym          function        argument */
-	{ MODKEY,                 XK_l,           externalpipe,   {.v = openurlcmd } },
-	{ MODKEY,                 XK_c,           externalpipe,   {.v = yankurlcmd } },
-	{ MODKEY,                 XK_o,           externalpipe,   {.v = yankoutputcmd } },
-	{ XK_ANY_MOD,             XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,            XK_Print,       toggleprinter,  {.i =  0} },
-	{ ShiftMask,              XK_Print,       printscreen,    {.i =  0} },
-	{ XK_ANY_MOD,             XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,                XK_K,           zoom,           {.f = +1} },
-	{ TERMMOD,                XK_J,           zoom,           {.f = -1} },
-	{ TERMMOD,                XK_U,           zoom,           {.f = +2} },
-	{ TERMMOD,                XK_D,           zoom,           {.f = -2} },
-	{ TERMMOD,                XK_R,           zoomreset,      {.f =  0} },
-	{ MODKEY,                 XK_y,           clipcopy,       {.i =  0} },
-	{ MODKEY,                 XK_p,           clippaste,      {.i =  0} },
-	{ MODKEY,                 XK_v,           selpaste,       {.i =  0} },
-	{ TERMMOD,                XK_Num_Lock,    numlock,        {.i =  0} },
-    { TERMMOD,                XK_Control_L,   iso14755,       {.i =  0} },
-	{ TERMMOD,                XK_Return,      newterm,        {.i =  1} },
-	{ TERMMOD|ControlMask,    XK_Return,      newterm,        {.i =  0} },
-	{ MODKEY,                 XK_k,           kscrollup,      {.i =  1} },
-	{ MODKEY,                 XK_j,           kscrolldown,    {.i =  1} },
-	{ MODKEY,                 XK_u,           kscrollup,      {.i = -1} },
-	{ MODKEY,                 XK_d,           kscrolldown,    {.i = -1} },
-    { MODKEY,                 XK_Escape,      keyboard_select,{.i =  0} },
+	/* mask                   keysym          function          argument */
+	{ MODKEY,                 XK_l,           externalpipe,     {.v = openurlcmd } },
+	{ MODKEY,                 XK_c,           externalpipe,     {.v = yankurlcmd } },
+	{ MODKEY,                 XK_o,           externalpipe,     {.v = yankoutputcmd } },
+	{ XK_ANY_MOD,             XK_Break,       sendbreak,        {.i =  0} },
+	{ ControlMask,            XK_Print,       toggleprinter,    {.i =  0} },
+	{ ShiftMask,              XK_Print,       printscreen,      {.i =  0} },
+	{ XK_ANY_MOD,             XK_Print,       printsel,         {.i =  0} },
+	{ TERMMOD,                XK_K,           zoom,             {.f = +1} },
+	{ TERMMOD,                XK_J,           zoom,             {.f = -1} },
+	{ TERMMOD,                XK_U,           zoom,             {.f = +2} },
+	{ TERMMOD,                XK_D,           zoom,             {.f = -2} },
+	{ TERMMOD,                XK_R,           zoomreset,        {.f =  0} },
+	{ MODKEY,                 XK_y,           clipcopy,         {.i =  0} },
+	{ MODKEY,                 XK_p,           clippaste,        {.i =  0} },
+	{ MODKEY,                 XK_v,           selpaste,         {.i =  0} },
+	{ TERMMOD,                XK_Num_Lock,    numlock,          {.i =  0} },
+	{ TERMMOD,                XK_Control_L,   iso14755,         {.i =  0} },
+	{ TERMMOD,                XK_Return,      newterm,          {.i =  1} },
+	{ TERMMOD|ControlMask,    XK_Return,      newterm,          {.i =  0} },
+	{ MODKEY,                 XK_k,           kscrollup,        {.i =  1} },
+	{ MODKEY,                 XK_j,           kscrolldown,      {.i =  1} },
+	{ MODKEY,                 XK_u,           kscrollup,        {.i = -1} },
+	{ MODKEY,                 XK_d,           kscrolldown,      {.i = -1} },
+	{ MODKEY,                 XK_Escape,      keyboard_select,  {.i =  0} },
 };
 
 /*

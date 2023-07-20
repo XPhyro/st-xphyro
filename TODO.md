@@ -1,0 +1,1 @@
+- Manually apply sixel patch.

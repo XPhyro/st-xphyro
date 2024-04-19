@@ -18,9 +18,9 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 #ifdef FONT_IS_JETBRAINS
-static char *font = "JetBrainsMono:pixelsize="FONTSIZE":antialias=true:autohint=true";
+static char *font = "JetBrainsMono:pixelsize=" FONTSIZE ":antialias=true:autohint=true";
 #else
-static char *font = "FiraCodeRetina:pixelsize="FONTSIZE":antialias=true:autohint=true";
+static char *font = "FiraCodeRetina:pixelsize=" FONTSIZE ":antialias=true:autohint=true";
 #endif
 /* Spare fonts */
 static char *font2[] = {
@@ -146,8 +146,8 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-/* float alpha = 0.6; */
-float alpha = 0.80;
+float alpha = 0.6; /**/
+/* float alpha = 0.80; /**/
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {

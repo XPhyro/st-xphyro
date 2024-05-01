@@ -1130,6 +1130,8 @@ tswapscreen(void)
 void
 newterm(const Arg* a)
 {
+	int fd;
+
 	switch (fork()) {
 	case -1:
 		die("fork failed: %s\n", strerror(errno));
@@ -1144,6 +1146,13 @@ newterm(const Arg* a)
 			unsetenv("REUSE_TABBED_XID");
 			execlp("st", "./st", NULL);
 		}
+
+		fd = open("/dev/null", O_WRONLY);
+		dup2(fd, STDOUT_FILENO);
+		dup2(fd, STDERR_FILENO);
+
+		break;
+	default:
 		break;
 	}
 }

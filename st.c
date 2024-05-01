@@ -2145,8 +2145,10 @@ strhandle(void)
 		return;
 	}
 
+	/*
 	fprintf(stderr, "erresc: unknown str ");
 	strdump();
+	*/
 }
 
 void

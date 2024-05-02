@@ -1812,8 +1812,10 @@ csihandle(void)
 	switch (csiescseq.mode[0]) {
 	default:
 	unknown:
+		/*
 		fprintf(stderr, "erresc: unknown csi ");
 		csidump();
+		*/
 		/* die(""); */
 		break;
 	case '@': /* ICH -- Insert <n> blank char */
